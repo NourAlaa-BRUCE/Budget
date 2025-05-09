@@ -2,6 +2,16 @@ package src;
 import src.models.User;
 import src.services.AuthService;
 import src.services.IncomeService;
+import src.services.BudgetService;
+import src.services.ReminderService;
+import src.storage.BudgetStorage;
+import src.storage.ExpenseStorage;
+import src.storage.GoalStorage;
+import src.storage.IncomeStorage;
+import src.storage.ReminderStorage;
+import src.storage.UserStorage;
+import src.services.GoalService;
+import src.services.ExpenseService;
 
 import java.util.Scanner;
 
@@ -9,8 +19,19 @@ public class Main {
     private static final Scanner sc = new Scanner(System.in);
     private static final AuthService auth = new AuthService();
     private static final IncomeService incomeService = new IncomeService();
+    private static final BudgetService budgetService = new BudgetService();
+    private static final ReminderService reminderService = new ReminderService();
+    private static final GoalService goalService = new GoalService();
+    private static final ExpenseService expenseService = new ExpenseService();
 
     public static void main(String[] args) {
+        UserStorage.load();
+        IncomeStorage.load();
+        BudgetStorage.load();
+        ExpenseStorage.load();
+        ReminderStorage.load();
+        GoalStorage.load();
+        
         boolean running = true;
         while (running) {
             System.out.println("\n=== Personal Budget App ===");
@@ -41,26 +62,31 @@ public class Main {
         while (loggedIn) {
             System.out.println("\n--- Dashboard (" + user.getUsername() + ") ---");
             System.out.println("1. Add Income");
-            System.out.println("2. Set Budget");
+            System.out.println("2. Create Budget");
             System.out.println("3. Track Expenses");
             System.out.println("4. Add Reminder");
-            System.out.println("5. Set Goal");
+            System.out.println("5. Set Savings Goal");
             System.out.println("6. View All Incomes");
-            System.out.println("7. Log Out");
+            System.out.println("7. View All Budgets");
+            System.out.println("8. View All Reminders");
+            System.out.println("9. View All Goals");
+            System.out.println("10. view All Expenses");
+            System.out.println("0. Log Out");
             System.out.print("Choose option: ");
             String opt = sc.nextLine();
 
             switch (opt) {
                 case "1" -> incomeService.addIncome();
-                case "2" -> System.out.println("[Set Budget] - under construction");
-                case "3" -> System.out.println("[Track Expenses] - under construction");
-                case "4" -> System.out.println("[Add Reminder] - under construction");
-                case "5" -> System.out.println("[Set Goal] - under construction");
+                case "2" -> budgetService.setBudget();
+                case "3" -> expenseService.trackExpenses();
+                case "4" -> reminderService.addReminder();
+                case "5" -> goalService.addGoal();
                 case "6" -> incomeService.viewAllIncomes();
-                case "7" -> {
-                    loggedIn = false;
-                    System.out.println("Logged out.");
-                }
+                case "7" -> budgetService.viewBudgets();
+                case "8" -> reminderService.viewReminders();
+                case "9" -> goalService.viewGoals();
+                case "10"-> expenseService.viewAllExpenses();
+                case "0" -> { loggedIn = false; System.out.println("Logged out."); }
                 default -> System.out.println("Invalid option.");
             }
         }
