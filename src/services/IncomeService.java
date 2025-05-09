@@ -44,6 +44,7 @@ public class IncomeService {
 
     public void viewAllIncomes() {
         System.out.println("\n--- All Incomes ---");
+        System.out.printf("%-12s | %-15s : %s%n", "Date", "Source", "Amount");
         List<Income> list = IncomeStorage.getAll();
         if (list.isEmpty()) {
             System.out.println("No incomes recorded.");
