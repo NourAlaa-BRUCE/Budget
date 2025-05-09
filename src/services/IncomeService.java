@@ -15,7 +15,7 @@ public class IncomeService {
      */
     public void addIncome() {
         System.out.println("\n--- Add Income ---");
-        System.out.print("Source (e.g., Salary): ");
+        System.out.print("Source (e.g., Salary, Freelance, Bonus, etc): ");
         String source = sc.nextLine();
 
         System.out.print("Amount: ");
