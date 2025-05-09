@@ -3,6 +3,7 @@
     This is a Java-based console application designed for personal financial management. It helps users track income, set budgets, manage expenses, create reminders, and set savings goals — all through a simple, text-based interface.
 
 => Features Implemented <=
+
 => Authentication
     Sign up with email, username, phone number, and password (with validation)
 
