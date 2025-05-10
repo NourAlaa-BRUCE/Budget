@@ -1,10 +1,13 @@
+
 package src;
 import src.models.User;
 import src.services.AuthService;
 import src.services.IncomeService;
 import src.services.BudgetService;
+import src.services.DebtService;
 import src.services.ReminderService;
 import src.storage.BudgetStorage;
+import src.storage.DebtStorage;
 import src.storage.ExpenseStorage;
 import src.storage.GoalStorage;
 import src.storage.IncomeStorage;
@@ -12,6 +15,8 @@ import src.storage.ReminderStorage;
 import src.storage.UserStorage;
 import src.services.GoalService;
 import src.services.ExpenseService;
+
+
 import java.util.Scanner;
 
 public class Main {
@@ -22,6 +27,7 @@ public class Main {
     private static final ReminderService reminderService = new ReminderService();
     private static final GoalService goalService = new GoalService();
     private static final ExpenseService expenseService = new ExpenseService();
+    private static final DebtService debtService = new DebtService();
 
     public static void main(String[] args) {
         UserStorage.load();
@@ -30,6 +36,7 @@ public class Main {
         ExpenseStorage.load();
         ReminderStorage.load();
         GoalStorage.load();
+        DebtStorage.load();
         
         boolean running = true;
         while (running) {
@@ -70,6 +77,9 @@ public class Main {
             System.out.println("8. View All Reminders");
             System.out.println("9. View All Goals");
             System.out.println("10. view All Expenses");
+            System.out.println("11. Add Debt");           
+            System.out.println("12. View Debts");          
+            System.out.println("13. Make Payment");
             System.out.println("0. Log Out");
             System.out.print("Choose option: ");
             String opt = sc.nextLine();
@@ -85,6 +95,9 @@ public class Main {
                 case "8" -> reminderService.viewReminders();
                 case "9" -> goalService.viewGoals();
                 case "10"-> expenseService.viewAllExpenses();
+                case "11"-> debtService.addDebt();          
+                case "12"-> debtService.listDebts();        
+                case "13"-> debtService.makePayment();
                 case "0" -> { loggedIn = false; System.out.println("Logged out."); }
                 default -> System.out.println("Invalid option.");
             }
