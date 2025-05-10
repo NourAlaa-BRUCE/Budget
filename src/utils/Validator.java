@@ -1,3 +1,4 @@
+// This utility class provides validation methods for email, password, and phone number formats.
 package src.utils;
 
 public class Validator {

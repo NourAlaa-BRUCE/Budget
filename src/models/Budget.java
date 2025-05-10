@@ -1,3 +1,6 @@
+// This class represents a budget with a specific category, spending limit, and a time range.
+// It provides methods to retrieve the budget's details such as category, limit, start date, and end date.
+
 package src.models;
 
 import java.time.LocalDate;

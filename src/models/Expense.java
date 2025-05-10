@@ -1,3 +1,6 @@
+// This class represents an expense with a category, amount, and date.
+// It provides methods to retrieve the expense's details and a string representation of the expense.
+
 package src.models;
 
 import java.time.LocalDate;

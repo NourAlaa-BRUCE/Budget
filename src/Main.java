@@ -12,7 +12,6 @@ import src.storage.ReminderStorage;
 import src.storage.UserStorage;
 import src.services.GoalService;
 import src.services.ExpenseService;
-
 import java.util.Scanner;
 
 public class Main {

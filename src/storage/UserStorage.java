@@ -6,12 +6,13 @@ import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
 
+// Manages storage and retrieval of user data.
 public class UserStorage {
     private static final String FILE = "data/users.txt";
-    private static final String SEP  = "\\|";
+    private static final String SEP = "\\|";
     private static List<User> users = new ArrayList<>();
 
-    // استدعِه في بداية main
+    // Loads all users from the file into the list.
     public static void load() {
         users.clear();
         try (BufferedReader reader = new BufferedReader(new FileReader(FILE))) {
@@ -22,13 +23,16 @@ public class UserStorage {
                     users.add(new User(p[0], p[1], p[2], p[3]));
                 }
             }
-        } catch (IOException ignored) {}
+        } catch (IOException ignored) {
+        }
     }
 
+    // Checks if a user with the given email exists in the storage.
     public static boolean exists(String email) {
         return users.stream().anyMatch(u -> u.getEmail().equalsIgnoreCase(email));
     }
 
+    // Adds a new user to the list and appends it to the file.
     public static void addUser(User u) {
         users.add(u);
         try (BufferedWriter w = new BufferedWriter(new FileWriter(FILE, true))) {
@@ -39,6 +43,7 @@ public class UserStorage {
         }
     }
 
+    // Retrieves a user by their email from the storage.
     public static User getUserByEmail(String email) {
         return users.stream().filter(u -> u.getEmail().equalsIgnoreCase(email)).findFirst().orElse(null);
     }

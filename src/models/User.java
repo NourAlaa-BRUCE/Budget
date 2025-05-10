@@ -1,3 +1,6 @@
+// This class represents a user with a username, email, phone number, and password.
+// It provides methods to retrieve the user's details.
+
 package src.models;
 
 public class User {

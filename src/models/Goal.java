@@ -1,3 +1,6 @@
+// This class represents a financial goal with a name, target amount, and saved amount.
+// It provides methods to retrieve the goal's details, add to the saved amount, and a string representation of the goal.
+
 package src.models;
 
 public class Goal {

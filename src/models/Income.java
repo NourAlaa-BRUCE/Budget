@@ -1,3 +1,6 @@
+// This class represents an income source with a description, amount, and date.
+// It provides methods to retrieve the income's details and a string representation of the income.
+
 package src.models;
 
 import java.time.LocalDate;
