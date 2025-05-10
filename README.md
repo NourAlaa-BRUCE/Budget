@@ -47,3 +47,17 @@
     Track progress
 
     Store in data/goals.txt
+
+=> Debt Repayment
+    Add and track personal debts (e.g., loans, credit)
+
+    View all debts with total and remaining balances
+
+    Make partial payments toward debts
+
+    Validate input (debt amount must be > 0)
+
+    Automatically update remaining balance after each payment
+
+    Store data in data/debts.txt
+
