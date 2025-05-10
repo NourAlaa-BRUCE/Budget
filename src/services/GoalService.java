@@ -11,6 +11,7 @@ public class GoalService {
     private final Scanner sc = new Scanner(System.in);
 
     public void addGoal() {
+        
         // Take Goal's name , target amount & validate it
         System.out.println("\n--- Set Savings Goal ---");
         System.out.print("Goal name (e.g., Umrah trip): ");
