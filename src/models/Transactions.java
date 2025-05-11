@@ -16,8 +16,8 @@ public class Transactions {
     private boolean isActive;
 
     public Transactions(int transactionId, String category, String transactionType,
-                        double amount, LocalDate startDate, LocalDate endDate,
-                        String recurrencePattern, boolean isActive) {
+            double amount, LocalDate startDate, LocalDate endDate,
+            String recurrencePattern, boolean isActive) {
         this.transactionId = transactionId;
         this.category = category;
         this.transactionType = transactionType;
@@ -28,23 +28,50 @@ public class Transactions {
         this.isActive = isActive;
     }
 
-    public int getTransactionId()        { return transactionId; }
-    public String getCategory()          { return category; }
-    public String getTransactionType()   { return transactionType; }
-    public double getAmount()            { return amount; }
-    public LocalDate getStartDate()      { return startDate; }
-    public LocalDate getEndDate()        { return endDate; }
-    public String getRecurrencePattern() { return recurrencePattern; }
-    public boolean isActive()            { return isActive; }
+    public int getTransactionId() {
+        return transactionId;
+    }
+
+    public String getCategory() {
+        return category;
+    }
+
+    public String getTransactionType() {
+        return transactionType;
+    }
+
+    public double getAmount() {
+        return amount;
+    }
+
+    public LocalDate getStartDate() {
+        return startDate;
+    }
+
+    public LocalDate getEndDate() {
+        return endDate;
+    }
+
+    public String getRecurrencePattern() {
+        return recurrencePattern;
+    }
+
+    public boolean isActive() {
+        return isActive;
+    }
+
+    public void setActive(boolean active) {
+        this.isActive = active;
+    }
 
     @Override
     public String toString() {
         return "Transaction #" + transactionId +
-               " | " + transactionType + ": " + category +
-               " | Amount: " + amount +
-               " | Start: " + startDate +
-               " | End: " + (endDate != null ? endDate : "N/A") +
-               " | Recurs: " + recurrencePattern +
-               " | Active: " + isActive;
+                " | " + transactionType + ": " + category +
+                " | Amount: " + amount +
+                " | Start: " + startDate +
+                " | End: " + (endDate != null ? endDate : "N/A") +
+                " | Recurs: " + recurrencePattern +
+                " | Active: " + isActive;
     }
 }

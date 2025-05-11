@@ -29,8 +29,7 @@ public class TransactionsStorage {
                         LocalDate.parse(p[4]),
                         p[5].equals("null") ? null : LocalDate.parse(p[5]),
                         p[6],
-                        Boolean.parseBoolean(p[7])
-                );
+                        Boolean.parseBoolean(p[7]));
                 transactions.add(t);
                 nextId = Math.max(nextId, t.getTransactionId() + 1); // ensure nextId is always increasing
             }
@@ -50,8 +49,7 @@ public class TransactionsStorage {
                     t.getStartDate().toString(),
                     (t.getEndDate() != null ? t.getEndDate().toString() : "null"),
                     t.getRecurrencePattern(),
-                    String.valueOf(t.isActive())
-            ));
+                    String.valueOf(t.isActive())));
             w.newLine();
         } catch (IOException e) {
             System.out.println("Error saving transaction: " + e.getMessage());
@@ -67,4 +65,25 @@ public class TransactionsStorage {
     public static int getNextId() {
         return nextId++;
     }
+
+    // Overwrites all transactions in the file
+    public static void saveAll(List<Transactions> transactions) {
+        try (BufferedWriter w = new BufferedWriter(new FileWriter(FILE))) {
+            for (Transactions t : transactions) {
+                w.write(String.join("|",
+                        String.valueOf(t.getTransactionId()),
+                        t.getCategory(),
+                        t.getTransactionType(),
+                        String.valueOf(t.getAmount()),
+                        t.getStartDate().toString(),
+                        (t.getEndDate() != null ? t.getEndDate().toString() : ""),
+                        t.getRecurrencePattern(),
+                        String.valueOf(t.isActive())));
+                w.newLine();
+            }
+        } catch (IOException e) {
+            System.out.println("Error saving transactions: " + e.getMessage());
+        }
+    }
+
 }

@@ -1,11 +1,14 @@
 
 package src;
+
 import src.models.User;
 import src.services.AuthService;
 import src.services.IncomeService;
 import src.services.BudgetService;
 import src.services.DebtService;
 import src.services.ReminderService;
+import src.services.TransactionsService;
+import src.storage.TransactionsStorage;
 import src.storage.BudgetStorage;
 import src.storage.DebtStorage;
 import src.storage.ExpenseStorage;
@@ -15,7 +18,6 @@ import src.storage.ReminderStorage;
 import src.storage.UserStorage;
 import src.services.GoalService;
 import src.services.ExpenseService;
-
 
 import java.util.Scanner;
 
@@ -28,6 +30,7 @@ public class Main {
     private static final GoalService goalService = new GoalService();
     private static final ExpenseService expenseService = new ExpenseService();
     private static final DebtService debtService = new DebtService();
+    private static final TransactionsService transactionsService = new TransactionsService();
 
     public static void main(String[] args) {
         UserStorage.load();
@@ -37,7 +40,8 @@ public class Main {
         ReminderStorage.load();
         GoalStorage.load();
         DebtStorage.load();
-        
+        TransactionsStorage.load();
+
         boolean running = true;
         while (running) {
             System.out.println("\n=== Personal Budget App ===");
@@ -77,9 +81,12 @@ public class Main {
             System.out.println("8. View All Reminders");
             System.out.println("9. View All Goals");
             System.out.println("10. view All Expenses");
-            System.out.println("11. Add Debt");           
-            System.out.println("12. View Debts");          
+            System.out.println("11. Add Debt");
+            System.out.println("12. View Debts");
             System.out.println("13. Make Payment");
+            System.out.println("14. Add Recurring Transaction");
+            System.out.println("15. View Transactions");
+            System.out.println("16. Cancel Recurring Transaction");
             System.out.println("0. Log Out");
             System.out.print("Choose option: ");
             String opt = sc.nextLine();
@@ -94,15 +101,20 @@ public class Main {
                 case "7" -> budgetService.viewBudgets();
                 case "8" -> reminderService.viewReminders();
                 case "9" -> goalService.viewGoals();
-                case "10"-> expenseService.viewAllExpenses();
-                case "11"-> debtService.addDebt();          
-                case "12"-> debtService.listDebts();        
-                case "13"-> debtService.makePayment();
-                case "0" -> { loggedIn = false; System.out.println("Logged out."); }
+                case "10" -> expenseService.viewAllExpenses();
+                case "11" -> debtService.addDebt();
+                case "12" -> debtService.listDebts();
+                case "13" -> debtService.makePayment();
+                case "14" -> transactionsService.addTransaction();
+                case "15" -> transactionsService.viewTransactions();
+                case "16" -> transactionsService.cancelTransaction();
+
+                case "0" -> {
+                    loggedIn = false;
+                    System.out.println("Logged out.");
+                }
                 default -> System.out.println("Invalid option.");
             }
         }
     }
 }
-   
-

@@ -80,6 +80,57 @@ public class TransactionsService {
         System.out.println("Transaction scheduled: " + tx);
     }
 
+    public void cancelTransaction() {
+        System.out.println("\n--- Cancel Recurring Transaction ---");
+        List<Transactions> list = TransactionsStorage.getAll();
+
+        if (list.isEmpty()) {
+            System.out.println("No transactions to cancel.");
+            return;
+        }
+
+        // Display all active transactions
+        System.out.printf("%-4s | %-10s | %-8s | %-6s | %-12s | %-12s | %-8s | %s%n",
+                "ID", "Category", "Type", "Amount", "Start", "End", "Repeat", "Active");
+        for (Transactions t : list) {
+            System.out.printf("%-4d | %-10s | %-8s | %-6.2f | %-12s | %-12s | %-8s | %s%n",
+                    t.getTransactionId(),
+                    t.getCategory(),
+                    t.getTransactionType(),
+                    t.getAmount(),
+                    t.getStartDate(),
+                    (t.getEndDate() != null ? t.getEndDate() : "N/A"),
+                    t.getRecurrencePattern(),
+                    t.isActive() ? "Yes" : "No");
+        }
+
+        // Ask user which one to cancel
+        System.out.print("Enter the ID of the transaction to cancel: ");
+        int id;
+        try {
+            id = Integer.parseInt(sc.nextLine());
+        } catch (NumberFormatException e) {
+            System.out.println("Invalid ID format.");
+            return;
+        }
+
+        boolean found = false;
+        for (Transactions t : list) {
+            if (t.getTransactionId() == id && t.isActive()) {
+                t.setActive(false);
+                found = true;
+                break;
+            }
+        }
+
+        if (found) {
+            TransactionsStorage.saveAll(list); // Persist the updated list
+            System.out.println("Transaction ID " + id + " has been canceled.");
+        } else {
+            System.out.println("Active transaction with that ID not found.");
+        }
+    }
+
     // Views all stored transactions
     public void viewTransactions() {
         System.out.println("\n--- All Recurring Transactions ---");
